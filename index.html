@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- VERY IMPORTANT FOR MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,
+                   maximum-scale=1.0, user-scalable=no">
+
+    <title>Somewhere between You and Me❤️</title>
+
+    <link rel="stylesheet" href="css/style.css?v=1.1">
+
+    <!-- Preload heavy transition images to prevent network drop errors -->
+    <link rel="preload" as="image" href="assets/photos/book-introduction.webp">
+    <link rel="preload" as="image" href="assets/photos/book-cover.webp">
+</head>
+
+<body>
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="heart-loader">♥</div>
+        <p>Loading our memories...</p>
+    </div>
+
+    <div id="bgImage" class="bg-image"></div>
+
+    <!-- =====================================================
+         PASSWORD / ENVELOPE SCREEN
+    ====================================================== -->
+
+    <section id="letterScreen" class="letter-screen">
+
+        <!-- <div class="intro">
+
+            <p class="small-heading">
+                A little something for you
+            </p>
+
+            <h1>
+                A letter,<br>
+                just for you.
+            </h1>
+
+            <p class="subtitle">
+                Some letters are meant to be opened slowly.
+            </p>
+
+        </div> -->
+
+        <!-- NEW PASSWORD AREA (Above Envelope) -->
+        <div id="passwordArea" class="password-area">
+            <h2 class="password-title">Made with a little love.</h2>
+            <p class="password-hint">Pass = We are F_ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ </p>
+
+            <div class="password-container">
+                <input id="passwordInput" type="password" placeholder="Our secret word" autocomplete="off">
+                <button id="unlockButton" aria-label="Unlock letter">♥</button>
+            </div>
+
+            <p id="wrongPassword" class="wrong-password">Hmm... think about us ❤️</p>
+        </div>
+
+        <!-- CELEBRATION CONTAINER -->
+        <div id="celebrationContainer" class="celebration-container"></div>
+
+
+
+    </section>
+
+
+    <!-- =====================================================
+         WHITE TRANSITION
+    ====================================================== -->
+
+    <div id="whiteTransition" class="white-transition"></div>
+
+
+    <!-- =====================================================
+         INTRO SCREEN
+    ====================================================== -->
+
+    <div id="introScreen" class="intro-screen">
+        <div class="intro-image-wrapper"></div>
+        <div class="intro-control-bar">
+            <button id="introContinueBtn" class="intro-continue-btn">Continue &rarr;</button>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         MAIN BIRTHDAY WEBSITE
+    ====================================================== -->
+
+    <main id="birthdayPage" class="birthday-page">
+
+        <div class="book-stage">
+            <div id="bookPagesStack" class="book-pages-stack">
+                <div id="pageFortyNine" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/End_chapter/back.webp" style="width: 100%; height: 100%; object-fit: fill;"
+                        alt="Back Cover">
+                </div>
+                <div id="pageFortyEight" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/End_chapter/to_be_continued.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="To Be Continued">
+                </div>
+                <div id="pageFortySeven" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter8(A%20Letter%20Written%20Just%20for%20You)/chapter8page4.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 8 Page 4">
+                </div>
+                <div id="pageFortySix" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter8(A%20Letter%20Written%20Just%20for%20You)/chapter8page3.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 8 Page 3">
+                </div>
+                <div id="pageFortyFive" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter8(A%20Letter%20Written%20Just%20for%20You)/chapter8page2.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 8 Page 2">
+                </div>
+                <div id="pageFortyFour" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter8(A%20Letter%20Written%20Just%20for%20You)/chapter8page1.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 8 Page 1">
+                </div>
+                <div id="pageFortyThree" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter8(A%20Letter%20Written%20Just%20for%20You)/chapter8.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 8 Cover">
+                </div>
+                <div id="pageQuiz" class="book-page placeholder-page locked-page"
+                    style="background-image: url('assets/photos/first-page.webp'); background-size: cover; background-position: center;">
+                    <div class="quiz-container">
+                        <!-- Active Quiz State -->
+                        <div id="quizContent" class="quiz-content">
+                            <p id="quizProgress" class="quiz-progress">Question 1 of 5</p>
+                            <h3 id="quizQuestion" class="quiz-question"></h3>
+                            <div id="quizOptions" class="quiz-options">
+                                <!-- Options injected via JS -->
+                            </div>
+                            <button id="quizNextBtn" class="quiz-next-btn" disabled>Next &rarr;</button>
+                        </div>
+
+                        <!-- Result State -->
+                        <div id="quizResult" class="quiz-result hidden">
+                            <h2 id="quizResultTitle"></h2>
+                            <p id="quizResultMessage"></p>
+                            <p id="quizScoreDisplay"></p>
+                            <button id="quizActionBtn" class="quiz-action-btn"></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="pageFortyTwo" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter7(Do%20You%20Remember)/chapter7_page1.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 7 Page 1">
+                </div>
+                <div id="pageFortyOne" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter7(Do%20You%20Remember)/chapter7.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 7 Cover">
+                </div>
+                <div id="pageForty" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter6(Our%20Little%20Universe)/chapter6_page2.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 6 Page 2">
+                </div>
+                <div id="pageThirtyNine" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter6(Our%20Little%20Universe)/chapter6_page1.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 6 Page 1">
+                </div>
+                <div id="pageThirtyEight" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter6(Our%20Little%20Universe)/chapter6.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 6 Cover">
+                </div>
+                <div id="pageThirtySeven" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter5(All%20the%20Little%20Things)/chapter5_page3.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 5 Page 3">
+                </div>
+                <div id="pageThirtySix" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter5(All%20the%20Little%20Things)/chapter5_page2.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 5 Page 2">
+                </div>
+                <div id="pageThirtyFive" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter5(All%20the%20Little%20Things)/chapter5_page1.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 5 Page 1">
+                </div>
+                <div id="pageThirtyFour" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter5(All%20the%20Little%20Things)/chapter5.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 5 Cover">
+                </div>
+                <div id="pageThirtyThree" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page11.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 11">
+                </div>
+                <div id="pageThirtyTwo" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page10.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 10">
+                </div>
+                <div id="pageThirtyOne" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page9.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 9">
+                </div>
+                <div id="pageThirty" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page8.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 8">
+                </div>
+                <div id="pageTwentyNine" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page7.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 7">
+                </div>
+                <div id="pageTwentyEight" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page6.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 6">
+                </div>
+                <div id="pageTwentySeven" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page5.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 5">
+                </div>
+                <div id="pageTwentySix" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page4.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 4">
+                </div>
+                <div id="pageTwentyFive" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page3.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 3">
+                </div>
+                <div id="pageTwentyFour" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page2.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 2">
+                </div>
+                <div id="pageTwentyThree" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4_page1.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Page 1">
+                </div>
+                <div id="pageTwentyTwo" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter4(The%20Days%20I%20Wish%20I%20Could%20Relive)/chapter4.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 4 Cover">
+                </div>
+                <div id="pageTwentyOne" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter3(Somewhere%20Along%20the%20Way)/chapter3_page8.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 3 Page 8">
+                </div>
+                <div id="pageTwenty" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter3(Somewhere%20Along%20the%20Way)/chapter3_page7.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 3 Page 7">
+                </div>
+                <div id="pageNineteen" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter3(Somewhere%20Along%20the%20Way)/chapter3_page6.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 3 Page 6">
+                </div>
+                <div id="pageEighteen" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter3(Somewhere%20Along%20the%20Way)/chapter3_page5.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 3 Page 5">
+                </div>
+                <div id="pageSeventeen" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter3(Somewhere%20Along%20the%20Way)/chapter3_page4.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 3 Page 4">
+                </div>
+                <div id="pageSixteen" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter3(Somewhere%20Along%20the%20Way)/chapter3_page3.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 3 Page 3">
+                </div>
+                <div id="pageFifteen" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter3(Somewhere%20Along%20the%20Way)/chapter3_page2.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 3 Page 2">
+                </div>
+                <div id="pageFourteen" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter3(Somewhere%20Along%20the%20Way)/chapter3_page1.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 3 Page 1">
+                </div>
+                <div id="pageThirteen" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter3(Somewhere%20Along%20the%20Way)/chapter3.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 3 Cover">
+                </div>
+                <div id="pageTwelve" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter2(The%20Day%20Our%20Story%20Began)/chapter2_page5.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 2 Page 5">
+                </div>
+                <div id="pageEleven" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter2(The%20Day%20Our%20Story%20Began)/chapter2_page4.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 2 Page 4">
+                </div>
+                <div id="pageTen" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter2(The%20Day%20Our%20Story%20Began)/chapter2_page3.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 2 Page 3">
+                </div>
+                <div id="pageNine" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter2(The%20Day%20Our%20Story%20Began)/chapter2_page2.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 2 Page 2">
+                </div>
+                <div id="pageEight" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter2(The%20Day%20Our%20Story%20Began)/chapter2_page1.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 2 Page 1">
+                </div>
+                <div id="pageSeven" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter2(The%20Day%20Our%20Story%20Began)/chapter2.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 2 Cover">
+                </div>
+                <div id="pageSix" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter1(Before%20There%20Was%20Us)/chapter1_final.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 1 Final">
+                </div>
+                <div id="pageFive" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter1(Before%20There%20Was%20Us)/chapter1_page3.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 1 Part 3">
+                </div>
+                <div id="pageFour" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter1(Before%20There%20Was%20Us)/chapter1_page2.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 1 Part 2">
+                </div>
+                <div id="pageThree" class="book-page paper-bg">
+                    <div class="page-content page-three-content">
+                        <h2 class="context-title" style="margin-bottom: 8px;">Two Separate Stories</h2>
+
+                        <p>Before our story had a &lsquo;we,&rsquo;<br>there was simply you.<br>And there was me.</p>
+
+                        <p>Two different lives.<br>Two different worlds.<br>Two people who had no idea
+                            that,<br>somewhere ahead,their paths would cross.</p>
+
+                        <div class="split-layout">
+                            <div class="half-column">
+                                <div id="chapter1-my-photo" class="vintage-photo-frame">
+                                    <img src="assets/chapter1(Before%20There%20Was%20Us)/my_world.webp" alt="My World"
+                                        style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <p class="decorative-label split-label">MY WORLD</p>
+                            </div>
+                            <div class="half-column">
+                                <div id="chapter1-her-photo" class="vintage-photo-frame">
+                                    <img src="assets/chapter1(Before%20There%20Was%20Us)/her_world.webp" alt="Her World"
+                                        style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <p class="decorative-label split-label">HER WORLD</p>
+                            </div>
+                        </div>
+
+
+                        <p class="decorative-label chapter-divider" style="margin-bottom: 0;">&mdash; &hearts; &mdash;
+                        </p>
+                    </div>
+                </div>
+
+                <div id="pageTwo" class="book-page placeholder-page" style="background-color: #f4e3d6;">
+                    <img src="assets/chapter1(Before%20There%20Was%20Us)/chapter1.webp"
+                        style="width: 100%; height: 100%; object-fit: fill;" alt="Chapter 1">
+                </div>
+
+                <div id="pageOne" class="book-page paper-bg active-page">
+                    <img src="assets/photos/him.webp" class="memory-illustration him-illustration" alt="">
+                    <img src="assets/photos/her.webp" class="memory-illustration her-illustration" alt="">
+
+                    <div class="page-content">
+                        <p class="decorative-label">A LITTLE NOTE</p>
+                        <h2 class="context-title">You must be wondering why I named our book…</h2>
+
+                        <h3 class="highlight-title">Somewhere Between You and Me</h3>
+
+                        <p>Because, in so many ways, we come from different worlds.</p>
+                        <p>We don't always think the same way. We don't always see things the same way. Even in the
+                            little things, our worlds can feel miles apart.</p>
+
+                        <p>A place where we meet halfway, where we make the effort to understand each other, and where —
+                            despite all our differences — we keep choosing us.</p>
+                        <p>Maybe that's what makes our story ours.</p>
+                        <p>Not that we were ever the same, but that we always found our way back to the same page.</p>
+                    </div>
+
+                    <div class="swipe-instruction interior-swipe">
+                        <span class="swipe-arrow">←</span>
+                        <span>Turn the page</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bookCover" class="book-cover">
+                <img src="assets/photos/book-cover.webp" alt="Our Story Book Cover">
+            </div>
+
+            <div id="swipeInstruction" class="swipe-instruction">
+                <span class="swipe-arrow">←</span>
+                <span>Swipe left to open our story</span>
+            </div>
+        </div>
+
+    </main>
+
+
+    <script src="js/script.js?v=1.1"></script>
+
+</body>
+
+</html>

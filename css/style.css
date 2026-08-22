@@ -1,0 +1,1462 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    /* Bulletproof Responsive Book Width */
+    /* This exactly mirrors .book-pages-stack width to simulate container queries safely */
+    --book-width: min(100vw, 450px, calc(98svh * 0.75));
+}
+
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: #f4e3d6; /* Warm vintage cream */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.heart-loader {
+    font-size: 40px;
+    color: #a65f6d;
+    animation: heartbeat 1.2s infinite;
+    margin-bottom: 15px;
+}
+
+.loading-overlay p {
+    font-family: 'Playfair Display', serif;
+    color: #8c4250;
+    font-size: 18px;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.25); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.25); }
+}
+
+body {
+    background: #fffaf7;
+    color: #493b38;
+    font-family: Georgia, "Times New Roman", serif;
+    overflow-x: hidden;
+}
+
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/photos/background.webp') center center / cover no-repeat;
+    z-index: -1;
+    transition: transform 2.5s ease-in-out;
+}
+
+.bg-image.zoom {
+    transform: scale(1.5);
+}
+
+
+/* =========================================================
+   LETTER SCREEN
+========================================================= */
+
+.letter-screen {
+
+    min-height: 100svh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px 20px;
+
+    position: relative;
+
+    /* Background removed to show body background */
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+
+}
+
+.intro.hide {
+
+    opacity: 0;
+
+    transform:
+        translateY(-20px);
+
+}
+
+
+.small-heading,
+.section-label {
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color: #a65f6d;
+
+    margin-bottom: 15px;
+
+}
+
+
+.intro h1 {
+
+    font-size: clamp(42px,
+            10vw,
+            76px);
+
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    color: #493b38;
+
+}
+
+
+.subtitle {
+
+    margin-top: 18px;
+
+    font-size: 16px;
+
+    font-style: italic;
+
+    opacity: 0.65;
+
+}
+
+
+/* Envelope removed */
+
+
+
+
+
+/* =========================================================
+   NEW PASSWORD AREA (ABOVE ENVELOPE)
+========================================================= */
+
+.password-area {
+    margin: 20px auto 30px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 20;
+    position: relative;
+
+    /* Romantic Glassmorphism */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: clamp(20px, 5vh, 30px) clamp(15px, 4vw, 20px);
+    box-shadow: 0 10px 40px rgba(166, 95, 109, 0.15);
+    max-width: 90%;
+    width: 360px;
+}
+
+.password-area.hidden {
+    opacity: 0;
+    transform: translateY(-15px);
+    pointer-events: none;
+}
+
+.password-title {
+    font-size: clamp(20px, 6vw, 26px);
+    font-weight: 500;
+    margin-bottom: clamp(6px, 1.5vh, 8px);
+    color: #8c4250;
+    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+.password-hint {
+    font-size: clamp(10px, 3vw, 14px);
+    opacity: 1;
+    color: #3b2a26;
+    margin-bottom: clamp(15px, 3vh, 25px);
+    font-weight: 500;
+    font-style: italic;
+    white-space: nowrap;
+    letter-spacing: -0.2px;
+}
+
+/* =========================================================
+   CELEBRATION EFFECTS
+========================================================= */
+.celebration-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.romantic-particle {
+    position: absolute;
+    bottom: -50px;
+    color: #ff4d6d;
+    font-size: 24px;
+    animation: floatParticle 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+    text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(0) scale(0.5) rotate(-20deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateY(-20vh) scale(1) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-100vh) scale(1.5) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+.password-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin: auto;
+}
+
+.password-container input {
+    flex-grow: 1;
+    border: 1px solid rgba(166, 95, 109, 0.4);
+    border-radius: 25px;
+    background: #ffffff;
+    padding: clamp(8px, 2vh, 12px) clamp(10px, 3vw, 18px);
+    text-align: center;
+    outline: none;
+    font-family: Georgia, serif;
+    font-size: clamp(14px, 4vw, 16px);
+    font-weight: bold;
+    color: #3b2a26;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+.password-container input:focus {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: #a65f6d;
+    box-shadow: 0 0 10px rgba(166, 95, 109, 0.2);
+}
+
+.password-container input::placeholder {
+    color: #887a77;
+    opacity: 0.7;
+}
+
+.password-container button {
+    border: none;
+    background: #a65f6d;
+    color: white;
+    border-radius: 50%;
+    width: clamp(38px, 10vw, 44px);
+    height: clamp(38px, 10vw, 44px);
+    font-size: clamp(16px, 5vw, 20px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(166, 95, 109, 0.4);
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.password-container button:hover {
+    transform: scale(1.08);
+    background: #8c4250;
+}
+
+.password-container button:active {
+    transform: scale(0.95);
+}
+
+.wrong-password {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #a65f6d;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.wrong-password.show {
+    opacity: 1;
+}
+
+
+.white-transition {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+}
+
+.white-transition.active {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   MAIN BIRTHDAY PAGE
+========================================================= */
+
+.birthday-page {
+
+    display: none;
+
+    opacity: 0;
+
+    background: transparent;
+
+    transition:
+        opacity 1.5s ease;
+
+}
+
+
+.birthday-page.show {
+
+    display: block;
+
+    opacity: 1;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 100svh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding:
+        70px 20px;
+
+}
+
+
+.hero h2 {
+
+    font-size: clamp(45px,
+            11vw,
+            90px);
+
+    font-weight: 400;
+
+    line-height: 1;
+
+}
+
+
+.heart-divider {
+
+    color: #a65f6d;
+
+    margin: 25px 0;
+
+    font-size: 22px;
+
+}
+
+
+.hero-text {
+
+    max-width: 430px;
+
+    line-height: 1.8;
+
+    opacity: .65;
+
+}
+
+
+/* =========================================================
+   LONG LETTER
+========================================================= */
+
+.long-letter {
+
+    max-width: 680px;
+
+    margin: auto;
+
+    padding:
+        90px 25px;
+
+}
+
+
+.long-letter h3,
+.memories h3,
+.timeline h3 {
+
+    font-size: clamp(30px,
+            7vw,
+            48px);
+
+    font-weight: 400;
+
+    line-height: 1.15;
+
+    margin-bottom: 30px;
+
+}
+
+
+.long-letter p {
+
+    font-size: 17px;
+
+    line-height: 2;
+
+    margin-bottom: 25px;
+
+    opacity: .82;
+
+}
+
+
+/* =========================================================
+   MEMORIES
+========================================================= */
+
+.memories {
+
+    max-width: 900px;
+
+    margin: auto;
+
+    padding:
+        80px 20px;
+
+}
+
+
+.memory-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,
+            1fr);
+
+    gap: 15px;
+
+}
+
+
+.memory-card {
+
+    margin-bottom: 20px;
+
+}
+
+
+.memory-card img {
+
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    border-radius: 4px;
+
+}
+
+
+.memory-card p {
+
+    font-size: 13px;
+
+    font-style: italic;
+
+    opacity: .65;
+
+    margin-top: 10px;
+
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.timeline {
+
+    max-width: 680px;
+
+    margin: auto;
+
+    padding:
+        80px 25px;
+
+}
+
+
+.timeline-item {
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 20px 1fr;
+
+    gap: 20px;
+
+    padding-bottom: 50px;
+
+}
+
+
+.timeline-item::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 9px;
+
+    top: 12px;
+
+    bottom: 0;
+
+    width: 1px;
+
+    background: #dec9c2;
+
+}
+
+
+.timeline-dot {
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #a65f6d;
+
+    margin-top: 7px;
+
+    z-index: 2;
+
+}
+
+
+.timeline-date {
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: #a65f6d;
+
+}
+
+
+.timeline-item h4 {
+
+    font-size: 24px;
+
+    font-weight: 400;
+
+    margin:
+        8px 0 10px;
+
+}
+
+
+.timeline-item p {
+
+    line-height: 1.8;
+
+    opacity: .7;
+
+}
+
+
+/* =========================================================
+   FINAL MESSAGE
+========================================================= */
+
+.final-message {
+
+    text-align: center;
+
+    padding:
+        100px 25px 120px;
+
+}
+
+
+.big-heart {
+
+    color: #a65f6d;
+
+    font-size: 35px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.final-message h3 {
+
+    font-size: clamp(40px,
+            9vw,
+            75px);
+
+    font-weight: 400;
+
+    line-height: 1.05;
+
+}
+
+
+.final-message p {
+
+    margin-top: 20px;
+
+    opacity: .65;
+
+}
+
+
+.signature {
+
+    margin-top: 50px;
+
+    line-height: 1.8;
+
+    font-style: italic;
+
+}
+
+
+.signature span {
+
+    color: #a65f6d;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    text-align: center;
+
+    padding:
+        25px;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    opacity: .4;
+
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVENESS
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .letter-screen {
+
+        padding:
+            25px 15px;
+
+    }
+
+
+    .intro h1 {
+
+        font-size: 43px;
+
+    }
+
+
+    .subtitle {
+
+        font-size: 14px;
+
+    }
+
+
+    .envelope-container {
+
+        height: 300px;
+
+    }
+
+
+    .envelope {
+
+        width: 90vw;
+
+        height: 220px;
+
+    }
+
+
+    .envelope-flap {
+
+        height: 135px;
+
+    }
+
+
+    .wax-seal {
+
+        top: 98px;
+
+        width: 48px;
+
+        height: 48px;
+
+    }
+
+
+    .letter-paper {
+
+        height: 190px;
+
+        padding:
+            18px;
+
+    }
+
+
+    .letter-content h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .envelope.open .letter-paper {
+
+        transform:
+            translateY(-120px);
+
+    }
+
+
+    .hero {
+
+        min-height: 90svh;
+
+    }
+
+
+    .hero h2 {
+
+        font-size: 48px;
+
+    }
+
+
+    .long-letter {
+
+        padding:
+            70px 20px;
+
+    }
+
+
+    .long-letter p {
+
+        font-size: 16px;
+
+        line-height: 1.9;
+
+    }
+
+
+    .memories {
+
+        padding:
+            60px 15px;
+
+    }
+
+
+    .memory-grid {
+
+        gap: 10px;
+
+    }
+
+
+    .timeline {
+
+        padding:
+            60px 20px;
+
+    }
+
+
+    .final-message {
+
+        padding:
+            80px 20px 100px;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .intro h1 {
+
+        font-size: 38px;
+
+    }
+
+
+    .envelope {
+
+        width: 94vw;
+
+    }
+
+
+    .letter-content h2 {
+
+        font-size: 19px;
+
+    }
+
+
+    .letter-hint {
+
+        font-size: 11px;
+
+    }
+
+
+    .hero h2 {
+
+        font-size: 42px;
+
+    }
+
+}
+
+/* =========================================================
+   INTRO SCREEN
+========================================================= */
+
+.intro-screen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100svh;
+    background: radial-gradient(circle at center, #fffcf8 0%, #f4e3d6 100%);
+    z-index: 40; /* Above the birthday page, below the white flash (50) */
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 1.8s ease; /* Slow romantic fade */
+}
+
+.intro-screen.show {
+    display: flex;
+    opacity: 1;
+}
+
+.intro-image-wrapper {
+    flex-grow: 1;
+    width: 100%;
+    background-image: url('../assets/photos/book-introduction.webp');
+    background-size: contain;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+}
+
+.intro-control-bar {
+    width: 100%;
+    padding: 15px 0 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background: transparent;
+}
+
+.intro-screen.show {
+    display: flex;
+    opacity: 1;
+}
+
+.intro-continue-btn {
+    background: transparent;
+    border: 1px solid rgba(166, 95, 109, 0.4);
+    color: #a65f6d;
+    padding: 12px 30px;
+    font-size: clamp(14px, 4vw, 16px);
+    font-family: Georgia, serif;
+    font-style: italic;
+    border-radius: 30px;
+    margin-bottom: 0;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.intro-continue-btn:hover, .intro-continue-btn:active {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: #a65f6d;
+}
+
+/* =========================================================
+   BIRTHDAY PAGE & BOOK REVEAL
+========================================================= */
+
+.birthday-page {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100svh;
+    background: radial-gradient(circle at center, #fffcf8 0%, #f4e3d6 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.birthday-page.show {
+    display: flex;
+}
+
+.book-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    perspective: 1500px;
+    position: relative;
+    z-index: 10;
+}
+
+.book-cover {
+    width: min(82vw, 390px);
+    aspect-ratio: 3 / 4;
+    position: relative;
+    opacity: 0; /* Starts hidden for entrance animation */
+    z-index: 5;
+    transform-origin: left center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.1s linear; /* for smooth drag */
+}
+
+.book-is-open .book-cover {
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform: rotateY(-180deg) !important;
+}
+
+.book-is-open #swipeInstruction {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .book-is-open .book-cover {
+        transform: rotateY(-180deg) !important;
+        opacity: 0 !important;
+    }
+}
+
+.birthday-page.show .book-cover {
+    animation: bookEntrance 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes bookEntrance {
+    0% { opacity: 0; transform: scale(0.96) translateY(20px) rotate(-1deg); }
+    100% { opacity: 1; transform: scale(1) translateY(0) rotate(-1deg); }
+}
+
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 25px rgba(60, 40, 30, 0.22));
+}
+
+.swipe-instruction {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #986a63;
+    font-style: italic;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.birthday-page.show .swipe-instruction {
+    animation: fadeIn 1s ease forwards 1.2s;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.swipe-arrow {
+    display: inline-block;
+    animation: bounceLeft 1.5s infinite;
+}
+
+@keyframes bounceLeft {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-5px); }
+}
+
+/* =========================================================
+   INTERIOR BOOK PAGES
+========================================================= */
+
+.book-pages-stack {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    max-width: min(450px, calc(98svh * 0.75)); /* Prevents it from getting too tall on short screens */
+    aspect-ratio: 1086 / 1448; /* Exact aspect ratio of the first-page graphic */
+    z-index: 1; /* Behind cover */
+    pointer-events: none; /* Ignore touches until open */
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    touch-action: pan-y; /* Prevent browser from intercepting horizontal swipes for history navigation */
+}
+
+.book-is-open .book-pages-stack {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.book-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f4e3d6; /* Permanent solid fallback to prevent bleed-through */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform-origin: left center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden; /* explicitly block scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate; /* Create new stacking context to prevent z-index piercing! */
+}
+
+.book-page.turned {
+    transform: rotateY(-180deg);
+    pointer-events: none;
+}
+
+.placeholder-page {
+    z-index: 1;
+}
+
+.paper-bg {
+    background-image: url('../assets/photos/first-page.webp');
+}
+
+.active-page {
+    z-index: 2;
+}
+
+.memory-illustration {
+    position: absolute;
+    width: 28%; /* Responsively scales with the book page width */
+    max-width: 120px;
+    opacity: 0.85; /* Increased opacity slightly since background is clear */
+    filter: sepia(0.3) contrast(1.1) grayscale(0.2);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.him-illustration {
+    top: 6%; 
+    left: 17%; /* Safely away from the spine */
+    transform: rotate(-6deg);
+}
+
+.her-illustration {
+    top: 6%;
+    right: 12%; /* Keep symmetrical inside border */
+    transform: rotate(4deg);
+}
+
+.page-content {
+    position: absolute;
+    top: 23%; /* Pushed further down as requested */
+    left: 17%; /* Safely dodge the thick spine on the left */
+    width: 66%; /* Keep strictly inside the drawn borders */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2; /* Keep above illustrations */
+}
+
+.decorative-label {
+    font-size: calc(var(--book-width) * 0.020);
+    letter-spacing: 3px;
+    color: #986a63;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.context-title {
+    font-size: calc(var(--book-width) * 0.032);
+    font-weight: 500;
+    color: #3b2a26;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    max-width: 100%;
+}
+
+.highlight-title {
+    font-size: calc(var(--book-width) * 0.036);
+    font-weight: 600;
+    color: #986a63;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.page-content p {
+    font-size: calc(var(--book-width) * 0.027);
+    line-height: 1.35;
+    margin-bottom: 6px;
+    color: #3b2a26;
+    max-width: 100%; /* Wraps naturally at 66% of the page */
+}
+
+/* Page Three Specifics */
+.page-three-content {
+    top: 14%; /* Start lower to center it perfectly below the flourishes */
+}
+
+.split-layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: calc(var(--book-width) * 0.03);
+    margin-bottom: calc(var(--book-width) * 0.03);
+}
+
+.half-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+}
+
+.vintage-photo-frame {
+    width: 100%;
+    /* aspect-ratio removed to allow native photo dimensions */
+    background-color: #dec8b6; /* Sepia empty tone */
+    border: calc(var(--book-width) * 0.015) solid #fbf7f3; /* Paper border */
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.15);
+    margin-bottom: calc(var(--book-width) * 0.02);
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden; /* Prevent photo from bleeding past the rounded corners */
+}
+
+.bottom-subtle-text {
+    font-size: calc(var(--book-width) * 0.026);
+    color: #5d4037;
+    text-align: center;
+    margin-bottom: 4px;
+    width: 100%;
+}
+
+/* Chapter Cover Specifics */
+.chapter-cover {
+    top: 0;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    height: 100%;
+}
+
+.chapter-number {
+    font-size: calc(var(--book-width) * 0.03);
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.chapter-title {
+    font-size: calc(var(--book-width) * 0.08);
+    font-weight: 500;
+    font-family: 'Playfair Display', serif;
+    max-width: 90%;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.chapter-divider {
+    font-size: 10px;
+    margin-bottom: 24px;
+    margin-top: 16px;
+    opacity: 0.7;
+}
+
+.page-turn-hint {
+    margin-top: clamp(8px, 2vh, 15px);
+    font-size: clamp(12px, 3.4vw, 14px) !important;
+    font-style: italic;
+    color: #986a63 !important;
+}
+
+.interior-swipe {
+    position: absolute;
+    bottom: clamp(15px, 3vh, 25px);
+    margin-top: 0;
+    color: #986a63;
+    animation: fadeIn 1s ease forwards 1s; /* Ensure it fades in when page is visible */
+}
+
+/* =========================================================
+   QUIZ PAGE UI
+========================================================= */
+
+.quiz-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+.quiz-content, .quiz-result {
+    width: 90%;
+    max-width: 320px;
+    background: rgba(244, 227, 214, 0.85); /* Vintage paper with translucency */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(140, 66, 80, 0.2);
+    border-radius: 15px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(140, 66, 80, 0.15);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.quiz-content.hidden, .quiz-result.hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(10px) scale(0.98);
+}
+
+.quiz-progress {
+    font-size: 12px;
+    font-style: italic;
+    color: #986a63;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.quiz-question {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 5vw, 22px);
+    color: #5a2e36;
+    margin-bottom: 25px;
+    line-height: 1.3;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.quiz-option {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(140, 66, 80, 0.3);
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 14px;
+    color: #4a252b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-weight: 500;
+}
+
+.quiz-option:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #8c4250;
+}
+
+.quiz-option.selected {
+    background: #8c4250;
+    color: #fff;
+    border-color: #8c4250;
+    box-shadow: 0 4px 10px rgba(140, 66, 80, 0.3);
+}
+
+.quiz-next-btn, .quiz-action-btn {
+    background: #8c4250;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(140, 66, 80, 0.3);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    width: 100%;
+}
+
+.quiz-next-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.quiz-next-btn:active:not(:disabled), .quiz-action-btn:active {
+    transform: scale(0.95);
+}
+
+.quiz-result h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 6vw, 24px);
+    color: #8c4250;
+    margin-bottom: 10px;
+}
+
+.quiz-result p {
+    font-size: 14px;
+    color: #4a252b;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+#quizScoreDisplay {
+    font-size: 18px;
+    font-weight: 700;
+    color: #8c4250;
+    margin-bottom: 25px;
+}
