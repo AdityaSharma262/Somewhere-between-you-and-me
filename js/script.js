@@ -5,7 +5,7 @@ const loadingOverlay = document.getElementById('loadingOverlay');
 if (loadingOverlay) {
     const bgImgObj = new Image();
     bgImgObj.src = 'assets/photos/background.webp';
-    
+
     function hideLoader() {
         setTimeout(() => {
             loadingOverlay.classList.add('hidden');
@@ -36,7 +36,7 @@ if (loadingOverlay) {
     to unlock the letter.
 */
 
-const SECRET_PASSWORD = "our";
+const SECRET_PASSWORD = "forevertogether";
 
 
 /* =========================================================
@@ -210,7 +210,7 @@ if (introContinueBtn && introScreen && birthdayPage) {
     introContinueBtn.addEventListener("click", () => {
         // 1. Show birthday page immediately behind the intro screen
         birthdayPage.classList.add("show");
-        
+
         // Brief timeout to ensure display: flex is applied before opacity transition
         setTimeout(() => {
             birthdayPage.style.opacity = "1";
@@ -277,10 +277,10 @@ if (bookCover && birthdayPage) {
 
     bookCover.addEventListener("touchmove", (e) => {
         if (!isDragging || bookIsOpened) return;
-        
+
         let currentX = e.touches[0].clientX;
         let diff = startX - currentX; // positive when swiping left
-        
+
         if (diff > 0) {
             // Map drag to a -180deg rotation. Fully open if swiped half the screen
             let progress = diff / (window.innerWidth * 0.5);
@@ -292,7 +292,7 @@ if (bookCover && birthdayPage) {
     bookCover.addEventListener("touchend", (e) => {
         if (!isDragging || bookIsOpened) return;
         isDragging = false;
-        
+
         let endX = e.changedTouches[0].clientX;
         let diff = startX - endX;
 
@@ -300,7 +300,7 @@ if (bookCover && birthdayPage) {
         if (diff > window.innerWidth * 0.25) {
             bookIsOpened = true;
             // Clear inline style so the CSS class can take over
-            bookCover.style.transform = ''; 
+            bookCover.style.transform = '';
             birthdayPage.classList.add("book-is-open");
         } else {
             // Snap back closed
@@ -323,21 +323,21 @@ if (bookPagesStack && pages.length > 0) {
 
     // Attach unified swipe listener to the stack container
     bookPagesStack.addEventListener("touchstart", (e) => {
-        if (!bookIsOpened) return; 
+        if (!bookIsOpened) return;
         pStartX = e.touches[0].clientX;
         pIsDragging = true;
     }, { passive: true });
 
     bookPagesStack.addEventListener("touchmove", (e) => {
         if (!pIsDragging || !bookIsOpened) return;
-        
+
         let currentX = e.touches[0].clientX;
         let diff = pStartX - currentX; // Positive when swiping left (forward)
-        
-        if (diff > 0) { 
+
+        if (diff > 0) {
             // Swiping FORWARD (turning the current active page)
             if (pages[activePageIndex].classList.contains("locked-page")) return;
-            
+
             if (activePageIndex < pages.length - 1) {
                 let progress = diff / (window.innerWidth * 0.5);
                 let degrees = Math.max(-180, Math.min(0, -(progress * 180)));
@@ -348,7 +348,7 @@ if (bookPagesStack && pages.length > 0) {
             let absDiff = Math.abs(diff);
             let progress = absDiff / (window.innerWidth * 0.5);
             let degrees = Math.max(-180, Math.min(0, -180 + (progress * 180)));
-            
+
             if (activePageIndex > 0) {
                 // Un-turn the previously turned page
                 pages[activePageIndex - 1].style.transform = `rotateY(${degrees}deg)`;
@@ -362,7 +362,7 @@ if (bookPagesStack && pages.length > 0) {
     bookPagesStack.addEventListener("touchend", (e) => {
         if (!pIsDragging || !bookIsOpened) return;
         pIsDragging = false;
-        
+
         let endX = e.changedTouches[0].clientX;
         let diff = pStartX - endX;
 
@@ -371,7 +371,7 @@ if (bookPagesStack && pages.length > 0) {
             if (pages[activePageIndex].classList.contains("locked-page")) return;
 
             if (activePageIndex < pages.length - 1) {
-                pages[activePageIndex].style.transform = ''; 
+                pages[activePageIndex].style.transform = '';
                 pages[activePageIndex].classList.add("turned");
                 activePageIndex++; // Advance our position in the stack
             }
@@ -379,7 +379,7 @@ if (bookPagesStack && pages.length > 0) {
             // Swiped backward enough to un-turn a page
             if (activePageIndex > 0) {
                 activePageIndex--; // Move back our position in the stack
-                pages[activePageIndex].style.transform = ''; 
+                pages[activePageIndex].style.transform = '';
                 pages[activePageIndex].classList.remove("turned");
             } else {
                 // Close the book cover completely
@@ -521,14 +521,14 @@ function showResults() {
         quizResultTitle.innerText = "YOU REMEMBER USSSS ❤️";
         quizResultMessage.innerText = "Okayyy meri jaan… tum actually remember us. 🥹";
         quizActionBtn.innerText = "UNLOCK MY BIRTHDAY WISH 🎂❤️";
-        
+
         // UNLOCK LOGIC
         pageQuiz.classList.remove("locked-page");
 
         quizActionBtn.onclick = () => {
             // Automatically turn the page for them!
             if (pageQuiz.classList.contains("book-page")) {
-                pageQuiz.style.transform = ''; 
+                pageQuiz.style.transform = '';
                 pageQuiz.classList.add("turned");
                 activePageIndex++;
             }
@@ -563,4 +563,4 @@ if (quizNextBtn) {
 if (pageQuiz) {
     pageQuiz.classList.add("locked-page"); // ensure it's always locked initially
     loadQuestion();
-}
+}
